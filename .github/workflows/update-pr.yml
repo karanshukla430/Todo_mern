@@ -11,16 +11,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
-      # - name: Set up Git
-      #   run: |
-      #     git config user.name "Your Name"
-      #     git config user.email "your@email.com"
+
+      - name: Push Changes
+        run: git push origin update-from-upstream
       
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.AUTH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           base: master
           branch: update-from-upstream  # Change to your temporary branch name
           commit-message: "Automated PR: Update from temporary branch"
