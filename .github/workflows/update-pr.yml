@@ -15,12 +15,38 @@ jobs:
       - name: Push Changes
         run: git push origin update-from-upstream
       
-      - name: Create Pull Request
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v5
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     base: master
+      #     branch: update-from-upstream  # Change to your temporary branch name
+      #     commit-message: "Automated PR: Update from temporary branch"
+      #     title: "Update from Temporary Branch"
+      #     body: "This pull request is automatically generated when changes are pushed to the temporary branch."
+
+       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update report
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: update-from-upstream
           base: master
-          branch: update-from-upstream  # Change to your temporary branch name
-          commit-message: "Automated PR: Update from temporary branch"
-          title: "Update from Temporary Branch"
-          body: "This pull request is automatically generated when changes are pushed to the temporary branch."
+          delete-branch: false
+          title: '[Example] Update report'
+          body: |
+            Update report
+            - Updated with date
+            
+          labels: |
+            report
+            automated pr
+          # team-reviewers: |
+          #   developers
+          #   qa-team
+          # milestone: 69
+          draft: false
