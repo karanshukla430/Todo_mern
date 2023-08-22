@@ -1,0 +1,39 @@
+name: Update and Create PR
+  
+on:
+  push:
+    branches:
+      - master
+  
+jobs:
+  update-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      
+      - name: Create Temporary Branch
+        run: |
+          TIMESTAMP=$(date +'%Y%m%d%H%M%S')
+          TEMP_BRANCH="temp-update-$TIMESTAMP"
+          git checkout -b $TEMP_BRANCH
+      
+      - name: Fetch Upstream Changes
+        run: git fetch source master
+      
+      - name: Merge Upstream Changes
+        run: git merge source/master
+      
+      - name: Push Changes
+        run: git push origin $TEMP_BRANCH
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: master
+          head: $TEMP_BRANCH
+          commit-message: "Automated PR: Update from upstream"
+          title: "Update from Upstream"
+          body: "This pull request is automatically generated to reflect the latest changes from the upstream repository."
