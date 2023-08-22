@@ -12,10 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Set up Git
-        run: |
-          git config user.name "Your Name"
-          git config user.email "your@email.com"
+      # - name: Set up Git
+      #   run: |
+      #     git config user.name "Your Name"
+      #     git config user.email "your@email.com"
       
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
