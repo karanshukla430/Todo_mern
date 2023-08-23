@@ -65,11 +65,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Make changes to pull request
-        run: date +%s > report.txt
+      # - name: Make changes to pull request
+      #   run: date +%s > report.txt
 
-      - name: Push Changes
-        run: git push origin update-from-upstream
+      # - name: Push Changes
+      #   run: git push origin update-from-upstream
 
       - name: Create Pull Request
         id: cpr
