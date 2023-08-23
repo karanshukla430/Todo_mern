@@ -81,7 +81,7 @@ jobs:
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
           branch: new-branch
-          base: master
+          base: update-from-upstream
           delete-branch: false
           title: '[Example] Update report'
           body: |
