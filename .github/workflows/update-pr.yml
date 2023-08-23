@@ -1,31 +1,77 @@
-name: Create Pull Request on Push to Temp Branch
+# name: Create Pull Request on Push to Temp Branch
+
+# on:
+#   push:
+#     branches:
+#       - update-from-upstream  # Change to your temporary branch name
+
+# jobs:
+#   create-pr:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#       - name: Make changes to pull request
+#         run: date +%s > report.txt
+
+#       - name: Push Changes
+#         run: git push origin update-from-upstream
+      
+#       # - name: Create Pull Request
+#       #   uses: peter-evans/create-pull-request@v5
+#       #   with:
+#       #     token: ${{ secrets.GITHUB_TOKEN }}
+#       #     base: master
+#       #     branch: update-from-upstream  # Change to your temporary branch name
+#       #     commit-message: "Automated PR: Update from temporary branch"
+#       #     title: "Update from Temporary Branch"
+#       #     body: "This pull request is automatically generated when changes are pushed to the temporary branch."
+
+#       - name: Create Pull Request
+#         id: cpr
+#         uses: peter-evans/create-pull-request@v5
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           commit-message: Update report
+#           committer: GitHub <noreply@github.com>
+#           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+#           signoff: false
+#           branch: update-from-upstream
+#           base: master
+#           delete-branch: false
+#           title: '[Example] Update report'
+#           body: |
+#             Update report
+#             - Updated with date
+            
+#           labels: |
+#             report
+#             automated pr
+#           # team-reviewers: |
+#           #   developers
+#           #   qa-team
+#           # milestone: 69
+#           draft: false
+
+name: Automated Pull Request
 
 on:
   push:
     branches:
-      - update-from-upstream  # Change to your temporary branch name
+      - version_update_2
 
 jobs:
-  create-pr:
+  createPullRequest:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Make changes to pull request
+        run: date +%s > report.txt
 
       - name: Push Changes
         run: git push origin update-from-upstream
-      
-      # - name: Create Pull Request
-      #   uses: peter-evans/create-pull-request@v5
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     base: master
-      #     branch: update-from-upstream  # Change to your temporary branch name
-      #     commit-message: "Automated PR: Update from temporary branch"
-      #     title: "Update from Temporary Branch"
-      #     body: "This pull request is automatically generated when changes are pushed to the temporary branch."
 
-       - name: Create Pull Request
+      - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
@@ -34,7 +80,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: update-from-upstream
+          branch: version_update_2
           base: master
           delete-branch: false
           title: '[Example] Update report'
