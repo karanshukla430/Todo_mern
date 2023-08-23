@@ -58,7 +58,7 @@ name: Automated Pull Request
 on:
   push:
     branches:
-      - update-from-upstream
+      - new-branch
 
 jobs:
   createPullRequest:
@@ -80,7 +80,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: update-from-upstream
+          branch: new-branch
           base: master
           delete-branch: false
           title: '[Example] Update report'
